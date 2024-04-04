@@ -1,35 +1,22 @@
 import fastify from "fastify"
-import { z } from 'zod'
-import { PrismaClient } from '@prisma/client'
+import { serializerCompiler, validatorCompiler, ZodTypeProvider } from "fastify-type-provider-zod"
+import { prisma } from "./lib/prisma";
+import { createEvent } from "./routes/create-event";
+import { registerForEvent } from "./routes/register-for-event";
+import { getEvent } from "./routes/get-events";
+import { getAttendeeBadge } from "./routes/get-attendee-badge";
+
 
 const app = fastify()
 
-const prisma = new PrismaClient({
-  log: ['query']
-})
+// Add schema validator and serializer
+app.setValidatorCompiler(validatorCompiler);
+app.setSerializerCompiler(serializerCompiler);
 
-app.post('/events', async (req,res) => {
-  const createEventSchena =z.object({
-    title: z.string().min(4),
-    details: z.string().nullable(),
-    maximumAttendees: z.number().int().positive().nullable()
-  })
-
-  const data = createEventSchena.parse(req.body)
-
-
-  const event = await prisma.event.create({
-    data: {
-      title: data.title,
-      details: data.details,
-      maximumAttendees:data.maximumAttendees,
-      slug: new Date().toISOString()
-    }
-  })
-
-  // console.log(event)
-  return res.status(201).send({eventId: event.id})
-})
+app.register(createEvent)
+app.register(registerForEvent)
+app.register(getEvent)
+app.register(getAttendeeBadge)
 
 app.get('/events', async (req,res)=>{
 

@@ -1,0 +1,4 @@
+ npx prisma studio === ver tabelas no prisma estudo (BD)
+
+ npx prisma migrate dev ==== criar migration de uma tabela no prisma 
+

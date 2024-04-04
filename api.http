@@ -3,7 +3,26 @@ Content-Type: application/json
 
 
 {
-  "title":"Unite Summit",
-  "details":"evento para apaixonados por programacao",
-  "maximumAttendees": 100
+  "title":"Show beneficiente1",
+  "details":"Publico em geral",
+  "maximumAttendees": 1
 }
+
+
+###
+POST http://localhost:3333/events/73817c8e-05d6-4b1d-9775-8a4ed533a992/attendees
+Content-Type: application/json
+
+{
+  "name":"Penas Nipute",
+  "email":"penaswilds@gmaild.com"
+}
+
+
+###
+GET http://localhost:3333/events/e72666c5-b2ec-42a6-9419-bb009ef7f79b
+Content-Type: application/json
+
+###
+GET http://localhost:3333/attendees/3/badge
+Content-Type: application/json
