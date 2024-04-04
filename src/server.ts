@@ -2,6 +2,7 @@ import fastify from "fastify"
 
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
+import fastifyCors from "@fastify/cors";
 
 import { jsonSchemaTransform, serializerCompiler, validatorCompiler, ZodTypeProvider } from "fastify-type-provider-zod"
 import { prisma } from "./lib/prisma";
@@ -33,6 +34,10 @@ app.register(fastifySwagger, {
   transform:jsonSchemaTransform
 })
 
+app.register(fastifyCors, {
+  origin:'*'
+})
+
 app.register(fastifySwaggerUi, {
   routePrefix:"/docs"
 })
@@ -59,6 +64,6 @@ app.get('/events', async (req,res)=>{
 
 app.setErrorHandler(errorHandler)
 
-app.listen({port:3333}).then(()=>{
+app.listen({port:3333, host:'0.0.0.0'}).then(()=>{
   console.log('HTTP server running')
 })
