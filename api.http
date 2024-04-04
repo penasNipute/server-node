@@ -3,19 +3,19 @@ Content-Type: application/json
 
 
 {
-  "title":"Show beneficiente1",
+  "title":"Show1 beneficiente1",
   "details":"Publico em geral",
   "maximumAttendees": 1
 }
 
 
 ###
-POST http://localhost:3333/events/73817c8e-05d6-4b1d-9775-8a4ed533a992/attendees
+POST http://localhost:3333/events/f992db0a-776f-4cce-8835-62285e6f3658/attendees
 Content-Type: application/json
 
 {
-  "name":"Penas Nipute",
-  "email":"penaswilds@gmaild.com"
+  "name":"Ernesto J. Nipute Jr.",
+  "email":"nicutejr@gmaild.com"
 }
 
 
@@ -25,4 +25,14 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3333/attendees/3/badge
+Content-Type: application/json
+
+
+###
+GET http://localhost:3333/attendees/1/check-in
+Content-Type: application/json
+
+
+###
+GET http://localhost:3333/events/f992db0a-776f-4cce-8835-62285e6f3658/attendees?query=j
 Content-Type: application/json

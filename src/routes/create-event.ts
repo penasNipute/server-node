@@ -6,7 +6,9 @@ import { FastifyInstance } from "fastify"
 
 export async function createEvent(app: FastifyInstance ){
 
-  app.withTypeProvider<ZodTypeProvider>().post('/events',{
+  app
+  .withTypeProvider<ZodTypeProvider>()
+  .post('/events',{
     schema:{
       body: z.object({
             title: z.string().min(4),
