@@ -5,7 +5,6 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 import fastifyCors from "@fastify/cors";
 
 import { jsonSchemaTransform, serializerCompiler, validatorCompiler, ZodTypeProvider } from "fastify-type-provider-zod"
-import { prisma } from "./lib/prisma";
 import { createEvent } from "./routes/create-event";
 import { registerForEvent } from "./routes/register-for-event";
 import { getEvent } from "./routes/get-events";
@@ -55,12 +54,6 @@ app.register(getAttendeeBadge)
 app.register(checkIn)
 app.register(getEventAttendees)
 
-app.get('/events', async (req,res)=>{
-
-
-  const allEvents= await prisma.event.findMany()
-  return res.status(200).send(allEvents)
-})
 
 app.setErrorHandler(errorHandler)
 
