@@ -4,18 +4,18 @@ import { ZodError } from 'zod'
 
 type FastifyErrorHandler = FastifyInstance['errorHandler']
  
-export const errorHandler: FastifyErrorHandler = (error, req, res) =>{
+export const errorHandler: FastifyErrorHandler = (error, req, reply) =>{
 
 
   if(error instanceof ZodError){
-    return res.status(400).send({
+    return reply.status(400).send({
       message:`Error during validation`,
       errors: error.flatten().fieldErrors,
     })
   }
 
-  if (error instanceof BadRequest){
-    return res.status(400).send({ mesage: error.message})
+  if (error instanceof Error){
+    return reply.status(400).send({ mesage: error.message})
   }
-  return res.status(500).send({message:'Internal server error'})
+  return reply.status(500).send({message:'Internal server error'})
 } 
